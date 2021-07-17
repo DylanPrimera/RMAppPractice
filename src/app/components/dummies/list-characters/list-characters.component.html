@@ -1,0 +1,22 @@
+<div *ngIf="characters$">
+  <div *ngFor="let c of characters$ | async" >
+    <mat-card class="example-card">
+      <mat-card-header>
+        <img mat-card-avatar [src]="c.image">
+        <mat-card-title>{{c.name}}</mat-card-title>
+        <mat-card-subtitle>{{c.species}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="c.image" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>Gender: {{c.gender}}</p>
+        <p>Status: {{c.status}}</p>
+        <p>Location: {{c.location.name}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+</div>
