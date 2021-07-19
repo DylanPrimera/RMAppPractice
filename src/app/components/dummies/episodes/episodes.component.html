@@ -1,0 +1,14 @@
+<div>
+  <mat-list>
+    <div mat-subheader>List of episodes</div>
+    <mat-list-item *ngFor="let e of episodes$ | async">
+      <mat-icon mat-list-icon>folder</mat-icon>
+      <div mat-line>{{e.name}}</div>
+      <div mat-line> {{e.episode}} </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+</div>
+
+
+

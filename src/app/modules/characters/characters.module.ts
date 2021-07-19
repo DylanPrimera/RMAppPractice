@@ -7,16 +7,23 @@ import { CharactersDetailsComponent } from '../../components/smarts/characters-d
 import {CharactersRoutingModule} from './characters-routing.module';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
 @NgModule({
-  declarations: [CharactersComponent, ListCharactersComponent, CharactersCardComponent, CharactersDetailsComponent],
-  imports: [
-    CommonModule,
-    CharactersRoutingModule,
-    MatCardModule,
-    MatButtonModule
-  ]
+    declarations: [CharactersComponent, ListCharactersComponent, CharactersCardComponent, CharactersDetailsComponent],
+    exports: [
+        ListCharactersComponent
+    ],
+    imports: [
+        CommonModule,
+        CharactersRoutingModule,
+        MatCardModule,
+        MatButtonModule,
+        MatGridListModule,
+        MatIconModule,
+    ]
 })
 export class CharactersModule { }
