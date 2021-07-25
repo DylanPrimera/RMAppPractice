@@ -10,6 +10,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import {FlexModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -21,15 +22,16 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
   exports: [
     ListCharactersComponent
   ],
-  imports: [
-    CommonModule,
-    CharactersRoutingModule,
-    MatCardModule,
-    MatButtonModule,
-    MatGridListModule,
-    MatIconModule,
-    InfiniteScrollModule,
-  ]
+    imports: [
+        CommonModule,
+        CharactersRoutingModule,
+        MatCardModule,
+        MatButtonModule,
+        MatGridListModule,
+        MatIconModule,
+        InfiniteScrollModule,
+        FlexModule,
+    ]
 })
 export class CharactersModule {
 }

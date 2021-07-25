@@ -9,6 +9,7 @@ import {HeaderModule} from './modules/header/header.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import {CommonModule} from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {CommonModule} from '@angular/common';
     HeaderModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

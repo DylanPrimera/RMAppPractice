@@ -15,13 +15,21 @@ export class CharactersComponent implements OnInit, OnDestroy {
   public subscription: Subscription = new Subscription();
   public showBtn = false;
   public pageScroll = 1;
+  public breakpoint: number;
 
   constructor( @Inject(DOCUMENT) private document: Document, private rmService: RmApiService, private localStorage: LocalStorageService) { }
 
   ngOnInit(): void {
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 4;
     this.localStorage.initialStorage();
     this.subscription.add(this.rmService.getData().subscribe());
     this.characters$ = this.rmService.characters$;
+  }
+
+  onResize(event): void {
+    if (event.target.innerWidth > 1000) { this.breakpoint = 3; }
+    if (event.target.innerWidth > 700 && event.target.innerWidth < 1000 ) { this.breakpoint = 2;}
+    if (event.target.innerWidth < 700) { this.breakpoint = 1; }
   }
 
   @HostListener('window:scroll')
