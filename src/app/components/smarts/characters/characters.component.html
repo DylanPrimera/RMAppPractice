@@ -4,4 +4,10 @@
       <app-list-characters [characters]="c"></app-list-characters>
     </mat-grid-tile>
   </mat-grid-list>
+  <div class="up-btn">
+    <button *ngIf="showBtn" mat-fab color="primary" (click)="scrollTop()">
+      <mat-icon>arrow_upward</mat-icon>
+    </button>
+  </div>
+
 </div>
