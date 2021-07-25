@@ -1,19 +1,22 @@
-<mat-card class="example-card">
-  <mat-card-header>
-    <img mat-card-avatar [src]="characters.image">
-    <mat-card-title>{{characters.name}}</mat-card-title>
-    <mat-card-subtitle>{{characters.species}}</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image [src]="characters.image" alt="Photo of a Shiba Inu">
-  <mat-card-content>
-    <p>Gender: {{characters.gender}}</p>
-    <p>Status: {{characters.status}}</p>
-    <p>Location: {{characters.location.name}}</p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button (click)="sendFavorite()">
-      <mat-icon >{{setIcon()}}</mat-icon>
-    </button>
-  </mat-card-actions>
-</mat-card>
+
+  <mat-card class="example-card">
+    <mat-card-header>
+      <img mat-card-avatar [src]="characters.image">
+      <mat-card-title>{{characters.name}}</mat-card-title>
+      <mat-card-subtitle>{{characters.species}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="characters.image" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p><strong>Gender: </strong> {{characters.gender}}</p>
+      <p>Status: {{characters.status}}</p>
+      <p>Origin: {{characters.origin.name}}</p>
+      <p>Location: {{characters.location.name}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="sendFavorite()" rel="preload">
+        <mat-icon >{{setIcon()}}</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
 

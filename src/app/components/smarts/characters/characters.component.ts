@@ -16,7 +16,6 @@ export class CharactersComponent implements OnInit, OnDestroy {
   constructor(private rmService: RmApiService, private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
-    this.localStorageService.initialStorage();
     this.subscription.add(this.rmService.getData().subscribe());
     this.characters$ = this.rmService.characters$;
   }

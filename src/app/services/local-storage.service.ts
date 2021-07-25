@@ -1,16 +1,19 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {FAVORITE_CHARACTERS} from '../util/constants';
 import {BehaviorSubject} from 'rxjs';
 import {CharacterType} from '../util/types/characters/character-type';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
-  private favCharactersBS = new BehaviorSubject<CharacterType>(null);
+  private favCharactersBS = new BehaviorSubject<CharacterType[]>(null);
   public favCharacters$ = this.favCharactersBS.asObservable();
 
-  constructor() { }
+  constructor(private toast: ToastrService) {
+    this.initialStorage();
+  }
 
   // en caso de que no haya nada en el local storage este metedo creará un array vacío
   initialStorage(): void {
@@ -18,6 +21,7 @@ export class LocalStorageService {
     if (!aux) {
       localStorage.setItem(FAVORITE_CHARACTERS, JSON.stringify([]));
     }
+    this.getFavorites();
   }
 
   clearStorage(): void {
@@ -38,32 +42,32 @@ export class LocalStorageService {
     }
   }
 
-  postOrDeleteFavorite(c: CharacterType): void {
-    const {id} = c;
+  public postOrDeleteFavorite(c: CharacterType): void {
     const currentFavs = this.getFavorites();
-    const found = !!currentFavs.find((favs: CharacterType) => favs.id = id);
-    found ? this.deleteFavorite(id) : this.postFavorite(c);
+    const found = !!currentFavs.find((favs: CharacterType) => favs.id = c.id);
+    found ? this.deleteFavorite(c.id) : this.postFavorite(c);
   }
 
   private postFavorite(character: CharacterType): void {
     try {
       const currentFavs = this.getFavorites();
-      localStorage.setItem(FAVORITE_CHARACTERS, JSON.stringify([... currentFavs, character]));
-      // @ts-ignore
+      localStorage.setItem(FAVORITE_CHARACTERS, JSON.stringify([...currentFavs, character]));
       this.favCharactersBS.next([...currentFavs, character]);
+      this.toast.success(`${character.name} successfully added to favorites!`, 'Favorites notification');
     } catch (e) {
-      console.log('Error when trying to post favorites characters', e);
+      this.toast.error(`'Error when trying to add ${character.name} to favorites characters`);
     }
   }
+
   private deleteFavorite(id: number): void {
     try {
       const currentFavs = this.getFavorites();
       const aux = currentFavs.filter(item => item.id !== id);
-      localStorage.setItem(FAVORITE_CHARACTERS, JSON.stringify([... aux]));
-      // @ts-ignore
+      localStorage.setItem(FAVORITE_CHARACTERS, JSON.stringify([...aux]));
       this.favCharactersBS.next([...aux]);
+      this.toast.success('successfully deleted of favorites characters!', 'Unfavorites notification');
     } catch (e) {
-
+      this.toast.error('Error when trying to delete of favorites characters', 'Unfavorites notification');
     }
   }
 }
