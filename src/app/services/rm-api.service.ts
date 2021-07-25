@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Apollo, gql} from 'apollo-angular';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {map, take, tap} from 'rxjs/operators';
+import {pluck, take, tap, withLatestFrom} from 'rxjs/operators';
 import {EpisodesType} from '../util/types/episodes/episodes-type';
 import {CharacterType} from '../util/types/characters/character-type';
 import {DataResponse} from '../util/types/data/data-response-type';
@@ -16,6 +16,7 @@ const QUERY = gql`{
   }
   characters {
     results {
+      id
       name
       status
       species
@@ -31,6 +32,7 @@ const QUERY = gql`{
   }
 }
 `;
+
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +56,39 @@ export class RmApiService {
         this.parseCharactersData(characters.results);
       })
     );
+  }
+
+  scrolledData(nm: number): void {
+    const QUERY_SCROLL = gql`{
+      characters(page: ${nm}) {
+        results {
+          id
+          name
+          status
+          species
+          gender
+          origin {
+            name
+          }
+          location {
+            name
+          }
+          image
+        }
+      }
+    }
+    `;
+
+    this.apollo.watchQuery<any>({
+      query: QUERY_SCROLL
+    }).valueChanges.pipe(
+      take(1),
+      pluck('data', 'characters'),
+      withLatestFrom(this.characters$),
+      tap(([apiResponse, characters]) => {
+        this.parseCharactersData([...characters, ...apiResponse.results]);
+      })
+    ).subscribe();
   }
 
   private parseCharactersData(characters: CharacterType[]): void {

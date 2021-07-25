@@ -12,7 +12,6 @@ export class LocalStorageService {
   public favCharacters$ = this.favCharactersBS.asObservable();
 
   constructor(private toast: ToastrService) {
-    this.initialStorage();
   }
 
   // en caso de que no haya nada en el local storage este metedo creará un array vacío
@@ -43,9 +42,10 @@ export class LocalStorageService {
   }
 
   public postOrDeleteFavorite(c: CharacterType): void {
+    const {id} = c;
     const currentFavs = this.getFavorites();
-    const found = !!currentFavs.find((favs: CharacterType) => favs.id = c.id);
-    found ? this.deleteFavorite(c.id) : this.postFavorite(c);
+    const found = !!currentFavs.find((favs: CharacterType) => favs.id === id);
+    found ? this.deleteFavorite(id) : this.postFavorite(c);
   }
 
   private postFavorite(character: CharacterType): void {

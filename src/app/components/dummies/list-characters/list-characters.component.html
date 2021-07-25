@@ -1,8 +1,25 @@
-
+<ng-container *ngIf="favCharacters else noFavs">
   <mat-card class="example-card">
     <mat-card-header>
-      <img mat-card-avatar [src]="characters.image" >
-      <mat-card-title class="title-card">{{characters.name}}</mat-card-title>
+      <img mat-card-avatar [src]="favCharacters.image" alt="avatar-image">
+      <mat-card-title>{{favCharacters.name}}</mat-card-title>
+      <mat-card-subtitle>{{favCharacters.species}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="favCharacters.image" alt="Character icon">
+    <mat-card-content>
+      <p><strong>Gender: </strong> {{favCharacters.gender}}</p>
+      <p>Status: {{favCharacters.status}}</p>
+      <p>Origin: {{favCharacters.origin.name}}</p>
+      <p>Location: {{favCharacters.location.name}}</p>
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+
+<ng-template #noFavs>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <img mat-card-avatar [src]="characters.image" alt="avatar-image">
+      <mat-card-title>{{characters.name}}</mat-card-title>
       <mat-card-subtitle>{{characters.species}}</mat-card-subtitle>
     </mat-card-header>
     <img mat-card-image [src]="characters.image" alt="Photo of a Shiba Inu">
@@ -13,10 +30,10 @@
       <p>Location: {{characters.location.name}}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button (click)="sendFavorite()" rel="preload">
+      <button mat-button (click)="sendFavorite()">
         <mat-icon >{{setIcon()}}</mat-icon>
       </button>
     </mat-card-actions>
   </mat-card>
-
+</ng-template>
 

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {CharacterType} from '../../../util/types/characters/character-type';
 import {LocalStorageService} from '../../../services/local-storage.service';
 
@@ -9,6 +9,7 @@ import {LocalStorageService} from '../../../services/local-storage.service';
 })
 export class ListCharactersComponent {
   @Input() characters: CharacterType;
+  @Input() favCharacters: CharacterType;
 
   constructor(private localStorage: LocalStorageService) {
   }

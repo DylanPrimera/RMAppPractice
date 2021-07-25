@@ -1,7 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
 import {CharacterType} from '../../../util/types/characters/character-type';
-import {RmApiService} from '../../../services/rm-api.service';
 import {LocalStorageService} from '../../../services/local-storage.service';
 
 @Component({
@@ -11,10 +10,11 @@ import {LocalStorageService} from '../../../services/local-storage.service';
 })
 export class FavoritesCharactersComponent implements OnInit {
   public favCharacters$: Observable<CharacterType[]>;
-  // public subscription: Subscription = new Subscription();
   public favorite = true;
 
-  constructor(private localStorage: LocalStorageService) { }
+  constructor(private localStorage: LocalStorageService) {
+    this.localStorage.initialStorage();
+  }
 
   ngOnInit(): void {
     this.localStorage.getFavorites();

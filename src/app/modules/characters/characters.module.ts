@@ -9,6 +9,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     MatGridListModule,
     MatIconModule,
+    InfiniteScrollModule,
   ]
 })
 export class CharactersModule {
